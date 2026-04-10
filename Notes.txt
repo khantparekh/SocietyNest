@@ -1,0 +1,3 @@
+- Give option for update profile
+- Visitor view option for the resident
+- option for wing in notice
