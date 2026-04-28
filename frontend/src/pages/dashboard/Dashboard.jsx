@@ -230,29 +230,29 @@ function Overview({ user, role, society, stats, setTab, activeMembership }) {
 
   const quickActions = {
     superadmin: [
-      { label:'Add Expense',     color:'var(--primary)', tab:'expenses',      emoji:'💰' },
-      { label:'Issue Notice',    color:'var(--warning)', tab:'notices',       emoji:'🔔' },
-      { label:'Issue Bill',      color:'var(--success)', tab:'bills',         emoji:'💳' },
-      { label:'Complaints',      color:'var(--danger)',  tab:'complaints',    emoji:'📋' },
-      { label:'Approve Members', color:'#7c3aed',        tab:'members',       emoji:'👥' },
-      { label:'Announcements',   color:'var(--info)',    tab:'announcements', emoji:'📢' },
+      { label:'Add Expense',     color:'var(--primary)', tab:'expenses',      emoji: DollarSign },
+      { label:'Issue Notice',    color:'var(--warning)', tab:'notices',       emoji: Bell },
+      { label:'Issue Bill',      color:'var(--success)', tab:'bills',         emoji: CreditCard },
+      { label:'Complaints',      color:'var(--danger)',  tab:'complaints',    emoji: MessageSquare },
+      { label:'Approve Members', color:'#7c3aed',        tab:'members',       emoji: Users },
+      { label:'Announcements',   color:'var(--info)',    tab:'announcements', emoji: Megaphone },
     ],
     wing_admin: [
-      { label:'Add Expense',  color:'var(--primary)', tab:'expenses',   emoji:'💰' },
-      { label:'Issue Bill',   color:'var(--success)', tab:'bills',      emoji:'💳' },
-      { label:'Complaints',   color:'var(--danger)',  tab:'complaints', emoji:'📋' },
-      { label:'Members',      color:'#7c3aed',        tab:'members',    emoji:'👥' },
+      { label:'Add Expense',  color:'var(--primary)', tab:'expenses',   emoji: DollarSign },
+      { label:'Issue Bill',   color:'var(--success)', tab:'bills',      emoji: CreditCard },
+      { label:'Complaints',   color:'var(--danger)',  tab:'complaints', emoji: MessageSquare },
+      { label:'Members',      color:'#7c3aed',        tab:'members',    emoji: Users },
     ],
     resident: [
-      { label:'Pay Bills',       color:'var(--success)', tab:'bills',         emoji:'💳' },
-      { label:'Raise Complaint', color:'var(--danger)',  tab:'complaints',    emoji:'📋' },
-      { label:'Notices',         color:'var(--primary)', tab:'notices',       emoji:'🔔' },
-      { label:'Rental Flats',    color:'#7c3aed',        tab:'rentals',       emoji:'🏠' },
+      { label:'Pay Bills',       color:'var(--success)', tab:'bills',         emoji: CreditCard },
+      { label:'Raise Complaint', color:'var(--danger)',  tab:'complaints',    emoji: MessageSquare },
+      { label:'Notices',         color:'var(--primary)', tab:'notices',       emoji: Bell },
+      { label:'Rental Flats',    color:'#7c3aed',        tab:'rentals',       emoji: Home },
     ],
     guard: [
-      { label:'Log Visitor',  color:'var(--success)', tab:'visitors', emoji:'🚶' },
-      { label:'View Notices', color:'var(--primary)', tab:'notices',  emoji:'🔔' },
-      { label:'Rental Flats', color:'var(--warning)', tab:'rentals',  emoji:'🏠' },
+      { label:'Log Visitor',  color:'var(--success)', tab:'visitors', emoji: Users },
+      { label:'View Notices', color:'var(--primary)', tab:'notices',  emoji: Bell },
+      { label:'Rental Flats', color:'var(--warning)', tab:'rentals',  emoji: Home },
     ],
   };
 
@@ -289,7 +289,7 @@ function Overview({ user, role, society, stats, setTab, activeMembership }) {
         <div className="card">
           <h3 style={{ fontSize:'11px', color:'var(--text-3)', textTransform:'uppercase', letterSpacing:'0.5px', marginBottom:'13px', fontWeight:700 }}>Quick Actions</h3>
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(120px,1fr))', gap:'9px' }}>
-            {actions.map(({ label, color, tab, emoji }) => (
+            {actions.map(({ label, color, tab, emoji : Icon }) => (
               <button key={label} onClick={() => setTab(tab)} style={{
                 padding:'13px 10px', borderRadius:'9px',
                 background:'var(--bg-surface)', border:'1px solid var(--border)',
@@ -298,7 +298,7 @@ function Overview({ user, role, society, stats, setTab, activeMembership }) {
               }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = color; e.currentTarget.style.color = 'var(--text)'; e.currentTarget.style.background = `${color}10`; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-2)'; e.currentTarget.style.background = 'var(--bg-surface)'; }}>
-                <span style={{ fontSize:'18px' }}>{emoji}</span>
+                <span style={{ fontSize:'18px' }}><Icon size={18} color={color}/></span>
                 {label}
               </button>
             ))}

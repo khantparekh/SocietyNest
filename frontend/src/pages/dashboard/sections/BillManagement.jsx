@@ -260,7 +260,7 @@ export default function BillManagement({ society }) {
                       ) : b.status === 'paid' ? (
                         <button
                           onClick={() => setReceipt({
-                            bill,
+                            bill: b,
                             paymentId: b.payuPaymentId || b.razorpayPaymentId || b.transactionId || '—',
                           })}
                           className="btn btn-ghost btn-sm"

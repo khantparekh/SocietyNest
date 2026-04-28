@@ -7,7 +7,7 @@ const { sendReceiptEmail } = require('../utils/sendEmail');
 const cashfree = require('../config/cashfree');
 
 
-// ─── GET /api/bills ──────────────────────────────────────────
+//  GET /api/bills
 router.get('/', protect, async (req, res) => {
   try {
     const filter = { societyId: req.societyId };
@@ -21,7 +21,7 @@ router.get('/', protect, async (req, res) => {
 });
 
 
-// ─── POST /api/bills/bulk ────────────────────────────────────
+//  POST /api/bills/bulk 
 router.post('/bulk', protect, async (req, res) => {
   try {
     if (!['superadmin', 'wing_admin'].includes(req.role))
@@ -62,7 +62,7 @@ router.post('/bulk', protect, async (req, res) => {
 });
 
 
-// ─── POST /api/bills (single) ────────────────────────────────
+//  POST /api/bills (single)
 router.post('/', protect, async (req, res) => {
   try {
     if (!['superadmin', 'wing_admin'].includes(req.role))
@@ -90,7 +90,7 @@ router.post('/', protect, async (req, res) => {
 });
 
 
-// ─── POST /api/bills/:id/create-order ───────────────────────
+//  POST /api/bills/:id/create-order 
 // Step 1: Create Cashfree order → returns payment_session_id
 // Frontend uses this to open the Cashfree popup (no redirect needed)
 router.post('/:id/create-order', protect, async (req, res) => {
@@ -154,7 +154,7 @@ router.post('/:id/create-order', protect, async (req, res) => {
 });
 
 
-// ─── POST /api/bills/:id/verify-payment ─────────────────────
+//  POST /api/bills/:id/verify-payment
 // Step 2: After Cashfree popup closes successfully,
 // frontend calls this to verify and mark bill as paid
 router.post('/:id/verify-payment', protect, async (req, res) => {
@@ -213,7 +213,7 @@ router.post('/:id/verify-payment', protect, async (req, res) => {
 });
 
 
-// ─── POST /api/bills/webhook ─────────────────────────────────
+//  POST /api/bills/webhook
 // Optional: Cashfree calls this on payment events (no auth needed)
 router.post('/webhook', async (req, res) => {
   try {
@@ -238,7 +238,7 @@ router.post('/webhook', async (req, res) => {
 });
 
 
-// ─── DELETE /api/bills/:id ───────────────────────────────────
+//  DELETE /api/bills/:id
 router.delete('/:id', protect, async (req, res) => {
   try {
     if (!['superadmin', 'wing_admin'].includes(req.role))

@@ -22,28 +22,6 @@ export default function Receipt({ bill, paymentId, societyName, onClose }) {
     } catch (err) { toast.error('Download failed: '+err.message); }
   };
 
-  // const handlePrint = () => {
-  //   const w = window.open('','_blank');
-  //   w.document.write(`<html><head><style>
-  //     *{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,sans-serif;padding:20px;background:#fff;color:#1e293b}
-  //     .hd{background:linear-gradient(135deg,#6366f1,#8b5cf6);padding:28px;text-align:center;border-radius:12px 12px 0 0;color:white;margin-bottom:0}
-  //     .hd h2{font-size:20px;margin:0}.hd p{font-size:12px;opacity:0.8;margin-top:4px}
-  //     .badge{display:inline-block;background:rgba(255,255,255,0.2);padding:4px 14px;border-radius:20px;font-size:11px;margin-top:10px}
-  //     .amt{text-align:center;padding:20px;border-bottom:1px dashed #e2e8f0}
-  //     .amt .n{font-size:40px;font-weight:800;color:#6366f1}.amt .l{font-size:12px;color:#94a3b8;margin-top:4px}
-  //     .rows{padding:16px 20px}.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f1f5f9;font-size:13px}
-  //     .row .k{color:#94a3b8}.row .v{font-weight:500;color:#1e293b}
-  //     .ft{background:#f8fafc;padding:14px 20px;text-align:center;border-radius:0 0 12px 12px}
-  //     .ft p{color:#94a3b8;font-size:11px}
-  //     .card{border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;max-width:400px;margin:0 auto}
-  //   </style></head><body>`);
-  //   w.document.write(ref.current.innerHTML);
-  //   w.document.write('</body></html>');
-  //   w.document.close();
-  //   w.focus(); w.print(); w.close();
-  //   toast.success('Sent to printer!');
-  // };
-
   const rows = [
     ['Receipt No.',  '#' + paymentId.slice(-10).toUpperCase()],
     ['Society',      societyName || 'SocietyNest'],
@@ -53,7 +31,7 @@ export default function Receipt({ bill, paymentId, societyName, onClose }) {
     ['Period',       `${bill.billMonth} ${bill.billYear}`],
     ['Payment ID',   paymentId],
     ['Date & Time',  new Date(bill.paidAt).toLocaleString('en-IN')],
-    ['Mode',         'Online (Razorpay)'],
+    ['Mode',         'Online (Cashfree)'],
     ['Status',       '✅ PAID'],
   ];
 
