@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://societynest360.vercel.app/sitemap.xml
