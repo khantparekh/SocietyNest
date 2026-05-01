@@ -1,11 +1,14 @@
 const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST || 'smtp.gmail.com',
-  port: process.env.EMAIL_PORT || 587,
-  secure: true,
-  auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+// const transporter = nodemailer.createTransport({
+//   host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+//   port: process.env.EMAIL_PORT || 587,
+//   secure: true,
+//   auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
+// });
 
 const sendReceiptEmail = async ({ to, name, bill, paymentId, societyName }) => {
   const html = `
@@ -59,21 +62,40 @@ const sendReceiptEmail = async ({ to, name, bill, paymentId, societyName }) => {
   </body>
   </html>`;
 
-  await transporter.sendMail({
-    from: process.env.EMAIL_FROM || '"SocietyNest" <noreply@societynest.in>',
-    to,
-    subject: `Payment Receipt — ${bill.title} (${bill.billMonth} ${bill.billYear})`,
-    html,
-  });
+  // await transporter.sendMail({
+  //   from: process.env.EMAIL_FROM || '"SocietyNest" <noreply@societynest.in>',
+  //   to,
+  //   subject: `Payment Receipt — ${bill.title} (${bill.billMonth} ${bill.billYear})`,
+  //   html,
+  // });
+
+  try {
+    const {data, error} = await resend.emails.send({
+      from: process.env.EMAIL_FROM,
+      to,
+      subject: `Payment Receipt — ${bill.title} (${bill.billMonth} ${bill.billYear})`,
+      html
+    })
+  
+    if(error){
+      console.error('❌ Email error:', error);
+    }
+  
+    if(data){
+      console.log('✅ Email sent:');
+    }
+  } catch (error) {
+    console.error('❌ Email exception:', err);
+  }
 };
 
-const sendOtpEmail = async ({ to, otp }) => {
-  await transporter.sendMail({
-    from: process.env.EMAIL_FROM,
-    to,
-    subject: 'SocietyNest — Email Verification OTP',
-    html: `<div style="font-family:Arial;padding:32px;text-align:center"><h2>Your OTP</h2><div style="font-size:48px;font-weight:800;color:#6366f1;letter-spacing:8px;">${otp}</div><p style="color:#94a3b8;margin-top:16px;">Valid for 10 minutes. Do not share with anyone.</p></div>`,
-  });
-};
+// const sendOtpEmail = async ({ to, otp }) => {
+//   await transporter.sendMail({
+//     from: process.env.EMAIL_FROM,
+//     to,
+//     subject: 'SocietyNest — Email Verification OTP',
+//     html: `<div style="font-family:Arial;padding:32px;text-align:center"><h2>Your OTP</h2><div style="font-size:48px;font-weight:800;color:#6366f1;letter-spacing:8px;">${otp}</div><p style="color:#94a3b8;margin-top:16px;">Valid for 10 minutes. Do not share with anyone.</p></div>`,
+//   });
+// };
 
-module.exports = { sendReceiptEmail, sendOtpEmail, transporter };
+module.exports = { sendReceiptEmail };

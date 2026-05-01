@@ -63,10 +63,6 @@ app.use((err, req, res, next) => {
   res.status(500).json({ success: false, message: err.message });
 });
 
-transporter.verify((error, success) => {
-  if (error) console.log('❌ Mail error:', error);
-  else console.log('✅ Mail server ready');
-});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server on port ${PORT}`));
