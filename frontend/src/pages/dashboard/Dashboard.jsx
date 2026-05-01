@@ -177,7 +177,7 @@ export default function Dashboard() {
       <div className="main-area">
         <div className="topbar">
           <div style={{ display:'flex', alignItems:'center', gap:'10px' }}>
-            <button onClick={() => setMobile(v => !v)} className="btn btn-icon btn-ghost btn-sm" style={{ display:'none' }} id="mobile-menu-btn">
+            <button onClick={() => setMobile(v => !v)} className="btn btn-icon btn-ghost btn-sm" id="mobile-menu-btn">
               <Menu size={17}/>
             </button>
             <h1 style={{ fontSize:'14.5px', fontWeight:600, color:'var(--text)' }}>
