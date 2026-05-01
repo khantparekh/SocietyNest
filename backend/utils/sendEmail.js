@@ -71,7 +71,7 @@ const sendReceiptEmail = async ({ to, name, bill, paymentId, societyName }) => {
 
   try {
     const {data, error} = await resend.emails.send({
-      from: process.env.EMAIL_FROM,
+      from: 'SocietyNest <onboarding@resend.dev>',
       to,
       subject: `Payment Receipt — ${bill.title} (${bill.billMonth} ${bill.billYear})`,
       html
