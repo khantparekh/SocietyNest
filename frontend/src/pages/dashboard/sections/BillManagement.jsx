@@ -111,7 +111,7 @@ export default function BillManagement({ society }) {
       const { paymentSessionId, orderId } = data;
 
       // Step 2 — load Cashfree SDK and open checkout popup
-      const cashfreeEnv = import.meta.env.REACT_APP_CASHFREE_ENV === 'production'
+      const cashfreeEnv = import.meta.env.VITE_CASHFREE_ENV === 'production'
         ? 'production' : 'sandbox';
 
       const cashfree = await window.Cashfree({ mode: cashfreeEnv });
