@@ -141,4 +141,4 @@ SocietyNest/
 
 ---
 
-Built for housing societies that are done with WhatsApp groups and Excel sheets. 🏘️
+Built for housing societies.
